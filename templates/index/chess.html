@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block center %}
+<div class="card card-cascade wider reverse mt-5 mb-5">
+  <div class="view view-cascade overlay">
+    <img height="400px;" class="card-img-top" src="https://images.chesscomfiles.com/uploads/v1/article/17623.87bb05cd.668x375o.47d81802f1eb@2x.jpeg" alt="Card image cap">
+    <a href="#!">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+  <div class="card-body card-body-cascade text-center">
+    <h4 class="card-title"><strong>Chess</strong></h4>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="btn-group-toggle text-center">
+        <p class="font-weight-bold">Select Date</p>
+        {% for i in date %}
+        <label class="pl-3">
+          <input type="radio" name="date" value="{{ i|date:'d-m-Y' }}" required> {{ i|date:"l" }}
+        </label>
+        {% endfor %}
+        <p></p>
+        <button type="submit" class="btn btn-outline-primary waves-effect">Select time</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

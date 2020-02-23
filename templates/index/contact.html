@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block full_row %}
+<div class="row">
+
+	<form method="POST">
+		<h3 class="center" style="font-family: 'Source Sans Pro', sans-serif;">Contact Us</h3>
+
+		{{ form.errors }}
+
+		<div class="form-group">
+			{{ form.full_name }}
+		</div>
+		<div class="form-group">
+			{{ form.email }}
+		</div>
+		<div class="form-group">
+			{{ form.confirm_email }}
+		</div>
+		<div class="form-group">
+			{{ form.message }}
+		</div>
+
+
+
+
+
+
+
+		{{ form.botcatcher }}
+		{% csrf_token %}
+
+
+		<button class="btn white-text btn-outline-info" type="submit" name="submit">Send
+		</button>
+	</form>
+	<!-- </div> -->
+
+</div>
+{% endblock %}

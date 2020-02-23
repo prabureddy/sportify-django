@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block center %}
+
+
+<div class="card card-cascade wider reverse mt-5">
+  <h6 class="text-center pt-3">These people are free when you are free</h6>
+  <div class="dropdown-divider"></div>
+
+
+
+
+
+
+  <div class="row">
+
+
+    {% for i in all_user %}
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <p class="text-center pt-2">{{ i|title }}</p>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <button type="button" class="btn btn-outline-primary mb-2" id="{{ i }}-button">Invite</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $('#{{ i }}-button').on('click', function(event) {
+
+
+        $.ajax({
+          type: 'GET',
+          url: "/invite/{{ user.username }}/{{ i }}/",
+          success: function(data) {},
+          error: function(xhr, errmsg, err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+        });
+
+        $('#{{ i }}-button').attr("disabled",'');
+        $('#{{ i }}-button').text("Invited");
+
+
+      });
+    </script>
+
+
+
+
+
+
+    {% endfor %}
+  </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style media="screen">
+  .errorlist{
+    display:none;
+  }
+</style>
+{% endblock %}
+
+{% block left_content %}
+<div class="row">
+  {% include 'Utility/Quick_Links.html' %}
+</div>
+<div class="row">
+  <div class="hide_ad">
+    {% include 'Utility/Ad.html' %}
+    {% include 'Utility/Ad.html' %}
+    {% include 'Utility/Ad.html' %}
+  </div>
+</div>
+{% endblock %}
+
+
+{% block center_content %}
+
+<div class="content-section">
+  <div class="row">
+    <div class="col xl12 l12 m12 s12">
+      <h6 class="center green-text"><b>Verification Email Sent to your Email..</b></h6>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block right_content %}
+
+
+<!-- TOP Contributer section -->
+<div class="row">
+  {% if right_side_small %}
+  {% for obj in right_side_small %}
+  <a href="{{ obj.link }}" target="blank"><img alt="{{ obj.alt }}" class="responsive-img center" src="{{ obj.image.url }}"></a>
+  <br><br>
+  {% endfor %}
+  {% endif %}
+  <div class="hide_ad">
+    {% include 'Utility/Ad.html' %}
+    {% include 'Utility/Ad.html' %}
+    {% include 'Utility/Ad.html' %}
+  </div>
+  <!-- ads end-->
+</div>
+{% endblock %}

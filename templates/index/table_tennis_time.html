@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block center %}
+<div class="card card-cascade wider reverse mt-5 mb-5">
+  <div class="view view-cascade overlay">
+    <img height="400px;" class="card-img-top" src="https://odishasuntimes.com/wp-content/uploads/2019/01/table-tennis.jpg" alt="Card image cap">
+    <a href="#!">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+  <div class="card-body card-body-cascade text-center">
+    <h4 class="card-title"><strong>Table Tennis</strong></h4>
+    <form method="post">
+      {% csrf_token %}
+      <div class="btn-group-toggle text-center">
+        <p class="font-weight-normal">Selected Date: {{ selected_date }} - {{ day }}.</p>
+        <p class="font-weight-bold">Available Slots</p>
+        {% for i in time %}
+        <label class="pl-3">
+          <input type="radio" name="time" value="{{ i }}-{{ i|add:'1' }}" required>{{ i }}-{{ i|add:"1" }}
+        </label>
+        {% endfor %}
+        <p></p>
+        <button type="submit" class="btn btn-outline-primary waves-effect">Enter Details</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

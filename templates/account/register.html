@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block center %}
+
+{% if not verify and not invalid %}
+<div class="content-section">
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend  style='font-weight:bold;font-size:20px;'>Join Today</legend>
+      {% csrf_token %}
+        {% for field in form %}<br>
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small style="display: none">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        {% endfor %}
+        {% for field in profile_form %}
+          <br>
+            {{ field.label_tag }}{{ field }}
+
+          {% if field.help_text %}
+            <small style="display: none">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        {% endfor %}
+
+      <button class="btn white-text btn-outline-info" type="submit">Sign up</button> <!--<a href="temail/login.html"><button type="submit">LogIn</a></button>-->
+      <div class="border-top pt-3">
+        <small class="text-muted">
+          Already Have An Account? <a class="ml-2" href="{% url 'account:login' %}">Sign In</a>
+        </small>
+      </div>
+      <div class="border-top pt-3">
+        <small class="text-muted">
+          Any Problem? <a class="ml-2" href="{% url 'home' %}">Contact Us</a>
+        </small>
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% elif verify %}
+<div class="row">
+  <div class="col xl12 l12 m12 s12">
+    <h6 class="center green-text"><b>Verification Link sent to your Email..</b></h6>
+    <p class="center" id="countdown">Page will redirect to home page in <span id='countdowninside'>11</span>s.</p>
+  </div>
+</div>
+<script>
+// Set the date we're counting down to
+var initial = 10;
+var seconds = initial - 1;
+// Update the count down every 1 second
+var x = setInterval(function() {
+  var get_timer = document.getElementById("countdowninside").innerHTML;
+  var seconds = get_timer - 1;
+  document.getElementById("countdown").innerHTML = "Page will redirect to home page in <span id='countdowninside'>" + seconds + "</span>s. ";
+
+  if (seconds < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "Page Redirecting....";
+    window.location.href='{% url 'home' %}'
+  }
+}, 1000);
+</script>
+{% elif invalid %}
+<div class="row">
+  <div class="col xl12 l12 m12 s12">
+    <h6 class="center green-text"><b>Link Already Used or Link Expired...</b></h6>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

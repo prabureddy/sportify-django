@@ -1,0 +1,926 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>sportify | Play your Lovable games at your time</title>
+  <link rel="icon" href="{% static 'icon.png' %}" type="image/x-icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+  <style media="screen">
+    .portlet {
+      margin-bottom: 15px;
+    }
+
+    .btn-white {
+      border-color: #cccccc;
+      color: #333333;
+      background-color: #ffffff;
+    }
+
+    .portlet {
+      border: 1px solid;
+    }
+
+    .portlet .portlet-heading {
+      padding: 0 15px;
+    }
+
+    .portlet .portlet-heading h4 {
+      padding: 1px 0;
+      font-size: 16px;
+    }
+
+    .portlet .portlet-heading a {
+      color: #fff;
+    }
+
+    .portlet .portlet-heading a:hover,
+    .portlet .portlet-heading a:active,
+    .portlet .portlet-heading a:focus {
+      outline: none;
+    }
+
+    .portlet .portlet-widgets .dropdown-menu a {
+      color: #333;
+    }
+
+    .portlet .portlet-widgets ul.dropdown-menu {
+      min-width: 0;
+    }
+
+    .portlet .portlet-heading .portlet-title {
+      float: left;
+    }
+
+    .portlet .portlet-heading .portlet-title h4 {
+      margin: 10px 0;
+    }
+
+    .portlet .portlet-heading .portlet-widgets {
+      float: right;
+      margin: 8px 0;
+    }
+
+    .portlet .portlet-heading .portlet-widgets .tabbed-portlets {
+      display: inline;
+    }
+
+    .portlet .portlet-heading .portlet-widgets .divider {
+      margin: 0 5px;
+    }
+
+    .portlet .portlet-body {
+      padding: 15px;
+      background: #fff;
+    }
+
+    .portlet .portlet-footer {
+      padding: 10px 15px;
+      background: #e0e7e8;
+    }
+
+    .portlet .portlet-footer ul {
+      margin: 0;
+    }
+
+    .portlet-green,
+    .portlet-green>.portlet-heading {
+      border-color: #16a085;
+    }
+
+    .portlet-green>.portlet-heading {
+      color: #fff;
+      background-color: #16a085;
+    }
+
+    .portlet-orange,
+    .portlet-orange>.portlet-heading {
+      border-color: #f39c12;
+    }
+
+    .portlet-orange>.portlet-heading {
+      color: #fff;
+      background-color: #f39c12;
+    }
+
+    .portlet-blue,
+    .portlet-blue>.portlet-heading {
+      border-color: #2980b9;
+    }
+
+    .portlet-blue>.portlet-heading {
+      color: #fff;
+      background-color: #2980b9;
+    }
+
+    .portlet-red,
+    .portlet-red>.portlet-heading {
+      border-color: #e74c3c;
+    }
+
+    .portlet-red>.portlet-heading {
+      color: #fff;
+      background-color: #e74c3c;
+    }
+
+    .portlet-purple,
+    .portlet-purple>.portlet-heading {
+      border-color: #8e44ad;
+    }
+
+    .portlet-purple>.portlet-heading {
+      color: #fff;
+      background-color: #8e44ad;
+    }
+
+    .portlet-default,
+    .portlet-dark-blue,
+    .portlet-default>.portlet-heading,
+    .portlet-dark-blue>.portlet-heading {
+      border-color: #34495e;
+    }
+
+    .portlet-default>.portlet-heading,
+    .portlet-dark-blue>.portlet-heading {
+      color: #fff;
+      background-color: #34495e;
+    }
+
+    .portlet-basic,
+    .portlet-basic>.portlet-heading {
+      border-color: #333;
+    }
+
+    .portlet-basic>.portlet-heading {
+      border-bottom: 1px solid #333;
+      color: #333;
+      background-color: #fff;
+    }
+
+    @media(min-width:768px) {
+      .portlet {
+        margin-bottom: 30px;
+      }
+    }
+
+    .img-chat {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text-green {
+      color: #16a085;
+    }
+
+    .text-orange {
+      color: #f39c12;
+    }
+
+    .text-red {
+      color: #e74c3c;
+    }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  {% block style %}{% endblock %}{% block script %}{% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand pl-5" href="{% url 'home' %}">
+      <img src="{% static 'full_logo_01.png' %}" height='80px;' class="d-inline-block align-top" alt="sportify">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-5">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown pl-3 pr-3">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Play
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'basketball' %}">Basketball</a>
+              <a class="dropdown-item" href="{% url 'cricket' %}">Cricket</a>
+              <a class="dropdown-item" href="{% url 'football' %}">Football</a>
+              <a class="dropdown-item" href="{% url 'badminton' %}">Badminton</a>
+              <a class="dropdown-item" href="{% url 'chess' %}">Chess</a>
+              <a class="dropdown-item" href="{% url 'table_tennis' %}">Table Tennis</a>
+              <a class="dropdown-item" href="{% url 'snooker' %}">Snooker</a>
+              <a class="dropdown-item" href="{% url 'volleyball' %}">Volleyball</a>
+            </div>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'invite' %}">Invite</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'account:profile' %}"><i class="fas fa-user-circle pl-2"></i> {{ user.first_name|title }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt pl-2"></i> Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'account:login' %}"><i class="fas fa-sign-in-alt pl-2"></i> Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'account:register' %}"><i class="fas fa-user-plus pl-2"></i> Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">{% block full_row %}{% endblock %}</div>
+    </div>
+    <div class="row">
+      <!-- <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">{% block left %}{% endblock %}</div> -->
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">{% block center %}{% endblock %}</div>
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">{% block right %}
+
+
+        <div class="card card-cascade wider reverse mt-5 mb-5">
+          <h6 class="text-center pt-3">Today's Weather</h6>
+          <div class="dropdown-divider"></div>
+          <div class="card-body card-body-cascade text-center">
+            <div class="row">
+              <div class="col-8" id="weather-content"></div>
+              <div class="col-4" id="weather-image"></div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $.ajax({
+              type: 'GET',
+              url: "/weather/",
+
+              success: function(json) {
+
+                // console.log(json)
+                $('#weather-content').append(
+                  '<span class="title">Jalandhar</span>' +
+                  '<br>' +
+                  '<span class="subtitle">' + json.weather.temperature + '° C</span>' +
+                  '<br>' + json.weather.description
+                );
+                $('#weather-image').append(
+                  '<figure class="image is-100x100">' +
+                  '<img src="http://openweathermap.org/img/w/' + json.weather.icon + '.png" alt="Image">' +
+                  '</figure>'
+                );
+              },
+              error: function(xhr, errmsg, err) {
+                // console.log(xhr.status + ": " + xhr.responseText);
+              }
+            });
+          });
+        </script>
+
+
+        {% if upcoming_game != '0' %}
+        <div class="card card-cascade wider reverse mt-5 mb-5">
+          <h6 class="text-center pt-3">Registered Games</h6>
+          <div class="dropdown-divider"></div>
+
+
+
+
+
+
+
+          {% for i in upcoming_game %}
+          <div class="card-body card-body-cascade text-center">
+          </div>
+          <button type="button" class="btn" data-toggle="collapse" data-target="#{{ i.game }}-{{ i.date }}-{{ i.time }}">
+            <p>{{ i.game }} - {{ i.date }} -> {{ i.time }}<br><small>Click to Chat</small></p>
+
+          </button>
+
+          <div class="collapse" id="{{ i.game }}-{{ i.date }}-{{ i.time }}">
+
+            <div class="container bootstrap snippet">
+              <div class="row">
+                <div class="col-md-12 col-md-offset-12">
+                  <div class="portlet portlet-default">
+                    <div class="portlet-heading">
+                      <div class="portlet-title">
+                        <h4><i class="fa fa-circle text-green"></i> {{ user.first_name|title }}</h4>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div id="{{ i.game }}-{{ i.date }}-{{ i.time }}" class="panel-collapse collapse in">
+                      <div>
+                        <div id="{{ i.game }}-{{ i.date }}-{{ i.time }}-chat" class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;">
+
+                        </div>
+                      </div>
+                      <div class="portlet-footer">
+                        <form method="post">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <input type="hidden" name="hidden" value="{{ i.game }}-{{ i.date }}-{{ i.time }}">
+                            <textarea id="{{ i.game }}-{{ i.date }}-{{ i.time }}-message" class="form-control" name="message" placeholder="Enter message..." required></textarea>
+                          </div>
+                          <div class="form-group">
+                            <button id="{{ i.game }}-{{ i.date }}-{{ i.time }}-button" type="button" class="btn submit btn-default pull-right">Send</button>
+                            <div class="clearfix"></div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-md-4 -->
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+          <div class="dropdown-divider"></div>
+          <script type="text/javascript">
+            setInterval(function() {
+              // $(document).ready(function(){
+
+              $("#{{ i.game }}-{{ i.date }}-{{ i.time }}-chat").empty();
+
+              $.ajax({
+                type: 'GET',
+                url: "/receive/{{ i.game }}-{{ i.date }}-{{ i.time }}/",
+                // data:{
+                // chat_detail: '{{ i.game }}-{{ i.date }}-{{ i.time }}',
+                // },
+                success: function(json) {
+                  json = JSON.parse(json)
+                  // console.log(json)
+
+
+                  for (i in json) {
+
+                    message = json[i].fields.message
+                    // console.log(message)
+
+                    $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-chat').append(
+                      '<div class="row">' +
+                      '<div class="col-lg-12">' +
+                      '<div class="media">' +
+                      '<div class="media-body">' +
+                      '<h5 id="{{ i.game }}-{{ i.date }}-{{ i.time }}-' + i + '-user" class="media-heading text-left"></h5>' +
+                      '<p class="text-left">' + message + '</p>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '<hr>'
+                    );
+
+
+                    $.ajax({
+                      type: 'GET',
+                      url: "/user/" + json[i].fields.user,
+
+                      success: function(jsona) {
+                        json1 = JSON.parse(jsona)
+
+                        for (j in json) {
+
+                          // console.log(json[j].fields.user)
+                          // console.log(json1[0].pk)
+
+
+                          if (json[j].fields.user === json1[0].pk) {
+                            $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-' + j + '-user').empty();
+                            $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-' + j + '-user').append(json1[0].fields.username);
+                          }
+                        }
+
+                        $("#{{ i.game }}-{{ i.date }}-{{ i.time }}-chat").animate({
+                          scrollTop: $(document).height()
+                        }, "slow");
+
+                      },
+                      // error : function(xhr,errmsg,err) {
+                      //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                      // }
+                    });
+
+
+                  }
+
+
+
+                },
+                error: function(xhr, errmsg, err) {
+                  // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+              });
+
+
+            }, 10000);
+
+
+            $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-button').on('click', function(event) {
+              if ($('#{{ i.game }}-{{ i.date }}-{{ i.time }}-message').val().length !== 0) {
+                $.ajax({
+                  type: 'POST',
+                  url: "/chat/",
+                  data: {
+                    chat_detail: '{{ i.game }}-{{ i.date }}-{{ i.time }}',
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    message: $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-message').val(),
+                  },
+                  success: function(json) {
+                    $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-chat').append(
+                      '<div class="row">' +
+                      '<div class="col-lg-12">' +
+                      '<div class="media">' +
+                      '<div class="media-body">' +
+                      '<h5 class="media-heading text-left">' + json.user + '</h5>' +
+                      '<p class="text-left">' + json.message + '</p>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '<hr>'
+                    );
+
+                    $('#{{ i.game }}-{{ i.date }}-{{ i.time }}-message').val('');
+                    $("#{{ i.game }}-{{ i.date }}-{{ i.time }}-chat").animate({
+                      scrollTop: $(document).height()
+                    }, "slow");
+
+                  },
+                  // error : function(xhr,errmsg,err) {
+                  //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                  // }
+                });
+              }
+            });
+          </script>
+          {% endfor %}
+
+
+
+
+
+
+        </div>
+
+
+        {% endif %}
+
+        {% if user.is_authenticated %}
+
+        <div class="card card-cascade wider reverse mt-5 mb-5">
+          <h6 class="text-center pt-3">Invitations</h6>
+
+
+
+          <div id="notification-accept" class="row pt-2">
+
+          </div>
+
+          <script type="text/javascript">
+            $(document).ready(function() {
+
+
+              $.ajax({
+                type: 'GET',
+                url: "/accept/",
+                success: function(data) {
+
+                  data = JSON.parse(data)
+                  // console.log(data)
+
+                  for (i in data) {
+
+
+                    $('#notification-accept').append(
+                      '<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">' +
+                      '<p style="text-transform:capitalize;" class="text-center pt-2">' + data[i].fields.invite_from + '</p>' +
+                      '</div>' +
+                      '<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">' +
+                      '<button type="button" class="btn btn-outline-primary mb-2" id="' + data[i].fields.invite_from + '-button-base">Accept</button>' +
+                      '</div>'
+                    );
+
+
+                    var s = document.createElement("script");
+                    s.type = "text/javascript";
+                    s.innerHTML = '$("#' + data[i].fields.invite_from + '-button-base").on("click", function(event) { ' +
+                      '$.ajax({type: "GET",url: "/accept/{{ user.username }}/' + data[i].fields.invite_from + '",success: function(data) { },error: function(xhr, errmsg, err) {},});' +
+                      '$("#' + data[i].fields.invite_from + '-button-base").attr("disabled", "");' +
+                      '$("#' + data[i].fields.invite_from + '-button-base").text("Accepted");' +
+                      '});';
+
+                    $('#notification-accept').append(s);
+
+
+
+
+                  }
+
+
+
+
+                },
+                error: function(xhr, errmsg, err) {
+                  // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+              });
+
+
+
+
+            });
+          </script>
+
+        </div>
+        {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% if user.is_authenticated %}
+
+        <div class="card card-cascade wider reverse mt-5 mb-5">
+          <h6 class="text-center pt-3">Friends</h6>
+          <div class="dropdown-divider"></div>
+
+
+
+          {% for i in friend_chat %}
+          <div class="card-body card-body-cascade text-center">
+          </div>
+
+
+          <div id="{{ i.friend_1 }}-{{ i.friend_2 }}-div" class="row">
+
+
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pl-5">
+            <button type="button" class="btn" data-toggle="collapse" data-target="#{{ i|cut:" " }}">
+
+              {% if i.friend_1 != user.username %}
+              <p>{{ i.friend_1|title }}<br><small>Click to Chat</small></p>
+              {% else %}
+              <p>{{ i.friend_2|title }}<br><small>Click to Chat</small></p>
+              {% endif %}
+
+            </button>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+          <button type="button" class="btn btn-outline-primary mb-2" id="{{ i.friend_1 }}-{{ i.friend_2 }}-unfriend">Unfriend</button>
+          <script type="text/javascript">
+            $(document).ready(function() {
+
+
+              $("#{{ i.friend_1 }}-{{ i.friend_2 }}-unfriend").on('click',function(event){
+
+                $.ajax({
+                  type: 'GET',
+                  url: "/unfriend/{{ i.friend_1 }}/{{ i.friend_2 }}",
+                  success: function(data) {
+                    $("#{{ i.friend_1 }}-{{ i.friend_2 }}-unfriend").attr("disabled", "");
+                    $("#{{ i.friend_1 }}-{{ i.friend_2 }}-unfriend").text("Unfriended");
+                    $("#{{ i.friend_1 }}-{{ i.friend_2 }}-div").hide("slow");
+                  },
+                  error: function(xhr, errmsg, err) {
+                    // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                  }
+                });
+
+              });
+
+
+            });
+          </script>
+          </div>
+
+          </div>
+
+
+
+
+          <div class="collapse" id="{{ i|cut:" " }}">
+
+            <div class="container bootstrap snippet">
+              <div class="row">
+                <div class="col-md-12 col-md-offset-12">
+                  <div class="portlet portlet-default">
+                    <div class="portlet-heading">
+                      <div class="portlet-title">
+                        <h4><i class="fa fa-circle text-green"></i> {{ user.first_name|title }}</h4>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div id="{{ i|cut:" " }}" class="panel-collapse collapse in">
+                      <div>
+                        <div id="{{ i|cut:" " }}-chat" class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;">
+
+                        </div>
+                      </div>
+                      <div class="portlet-footer">
+                        <form method="post">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <input type="hidden" name="hidden" value="{{ i|cut:" " }}">
+                            <textarea id="{{ i|cut:" " }}-message" class="form-control" name="message" placeholder="Enter message..." required></textarea>
+                          </div>
+                          <div class="form-group">
+                            <button id="{{ i|cut:" " }}-button" type="button" class="btn submit btn-default pull-right">Send</button>
+                            <div class="clearfix"></div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-md-4 -->
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+          <div class="dropdown-divider"></div>
+          <script type="text/javascript">
+            setInterval(function() {
+              // $(document).ready(function(){
+
+              $("#{{ i|cut:" " }}-chat").empty();
+
+              $.ajax({
+                type: 'GET',
+                url: "/receive/{{ i|cut:" " }}/",
+                // data:{
+                // chat_detail: '{{ i.game }}-{{ i.date }}-{{ i.time }}',
+                // },
+                success: function(json) {
+                  json = JSON.parse(json)
+                  // console.log(json)
+
+
+                  for (i in json) {
+
+                    message = json[i].fields.message
+                    // console.log(message)
+
+                    $('#{{ i|cut:" " }}-chat').append(
+                      '<div class="row">' +
+                      '<div class="col-lg-12">' +
+                      '<div class="media">' +
+                      '<div class="media-body">' +
+                      '<h5 id="{{ i|cut:" " }}-' + i + '-user" class="media-heading text-left"></h5>' +
+                      '<p class="text-left">' + message + '</p>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '<hr>'
+                    );
+
+
+                    $.ajax({
+                      type: 'GET',
+                      url: "/user/" + json[i].fields.user,
+
+                      success: function(jsona) {
+                        json1 = JSON.parse(jsona)
+                        console.log(json)
+
+                        for (j in json) {
+
+                          // console.log(json[j].fields.user)
+                          // console.log(json1[0].pk)
+
+
+                          if (json[j].fields.user === json1[0].pk) {
+                            $('#{{ i|cut:" " }}-' + j + '-user').empty();
+                            $('#{{ i|cut:" " }}-' + j + '-user').append(json1[0].fields.username);
+                          }
+                        }
+
+                        $("#{{ i }}-chat").animate({
+                          scrollTop: $(document).height()
+                        }, "slow");
+
+                      },
+                      // error : function(xhr,errmsg,err) {
+                      //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                      // }
+                    });
+
+
+                  }
+
+
+
+                },
+                error: function(xhr, errmsg, err) {
+                  console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+              });
+
+
+            }, 10000);
+
+
+            $('#{{ i|cut:" " }}-button').on('click', function(event) {
+              if ($('#{{ i|cut:" " }}-message').val().length !== 0) {
+                $.ajax({
+                  type: 'POST',
+                  url: "/chat/",
+                  data: {
+                    chat_detail: '{{ i|cut:" " }}',
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    message: $('#{{ i|cut:" " }}-message').val(),
+                  },
+                  success: function(json) {
+                    $('#{{ i|cut:" " }}-chat').append(
+                      '<div class="row">' +
+                      '<div class="col-lg-12">' +
+                      '<div class="media">' +
+                      '<div class="media-body">' +
+                      '<h5 class="media-heading text-left">' + json.user + '</h5>' +
+                      '<p class="text-left">' + json.message + '</p>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>' +
+                      '<hr>'
+                    );
+
+                    $('#{{ i|cut:" " }}-message').val('');
+                    $("#{{ i|cut:" " }}-chat").animate({
+                      scrollTop: $(document).height()
+                    }, "slow");
+
+                  },
+                  // error : function(xhr,errmsg,err) {
+                  //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                  // }
+                });
+              }
+            });
+          </script>
+          {% endfor %}
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {% endif %}
+
+
+
+
+
+
+
+
+
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  <footer class="page-footer font-small text-white bg-dark unique-color-dark">
+    <div style="background-color: #6351ce;">
+      <div class="container">
+        <div class="row py-4 d-flex align-items-center">
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <h6 class="mb-0">Get connected with us on social networks!</h6>
+          </div>
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+            <a class="fb-ic">
+              <i class="fab fa-facebook-f white-text mr-4"> </i>
+            </a>
+            <a class="tw-ic">
+              <i class="fab fa-twitter white-text mr-4"> </i>
+            </a>
+            <a class="gplus-ic">
+              <i class="fab fa-google-plus-g white-text mr-4"> </i>
+            </a>
+            <a class="li-ic">
+              <i class="fab fa-linkedin-in white-text mr-4"> </i>
+            </a>
+            <a class="ins-ic">
+              <i class="fab fa-instagram white-text"> </i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid text-center text-md-left pt-4">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3 text-center">
+          <ahref="{% url 'home' %}">
+            <img src="{% static 'icon.png' %}" height='80px;' class="d-inline-block align-top" alt="sportify">
+            </a>
+            <h5 class="text-uppercase pt-4">sportify</h5>
+            <p>Let's play the game with full spirit.</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase">Play</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-md-0 mb-3">
+          <h5 class="text-uppercase">play</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+      <a href="{% url 'home' %}">sportify.com</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

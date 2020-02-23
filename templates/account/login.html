@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block center %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend style='font-weight:bold;font-size:20px;'>Login</legend>
+                {% if messages %}
+                {% for i in messages %}
+                <div class="row">
+                  <div class="col xl12 l12 m12 s12">
+                    <h6 class="center green-text"><b>{{ i }}</b></h6>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                  <strong class="red-text">{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                  <strong class="red-text">{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {{ form.as_p }}
+                <div class="form-group">
+                    <button class="btn white-text btn-outline-info" type="submit">Login</button>
+                </div>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Forgot Password? <a href="{% url 'account:password_reset' %}">Reset Password Now</a>
+                    </small>
+                </div>
+                <div class="border-top pt-3">
+                  <small class="text-muted">
+                    Any Problem? <a class="ml-2" href="{% url 'home' %}">Contact Us</a>
+                  </small>
+                </div>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Need An Account? <a href="{% url 'account:register' %}">Sign Up Now</a>
+                    </small>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+{% endblock %}

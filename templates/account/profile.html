@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block center %}
+
+
+
+<div class="content-section">
+  <fieldset class="form-group">
+    <legend style='font-weight:bold;font-size:20px;'>Your Profile</legend>
+    <div class="alert alert-success">
+      <strong>Username: {{ user.username }}</strong>
+    </div>
+    {% if user.get_full_name|length != 0 %}
+    <div class="alert alert-success">
+      <strong>Name: {{ user.get_full_name|title }}</strong>
+    </div>
+    {% endif %}
+    {% if user.email|length != 0 %}
+    <div class="alert alert-success">
+      <strong>Email: {{ user.email }}</strong>
+    </div>
+    {% endif %}
+    {% if user.userprofile.registration_no %}
+    <div class="alert alert-success">
+      <strong>Registration No: {{ user.userprofile.registration_no }}</strong>
+    </div>
+    {% endif %}
+    {% if user.userprofile.phone_no %}
+    <div class="alert alert-success">
+      <strong>Phone Number: {{ user.userprofile.phone_no }}</strong>
+    </div>
+    {% endif %}
+    <br>
+    <div class="row center">
+      <div class="col s4">
+        <a href="{% url 'account:password_change' %}" class="waves-effect waves-light btn"><i class="fas fa-key left"></i> Change Password</a>
+      </div>
+      <div class="col s4">
+        <a href="{% url 'account:profile_edit' %}" class="waves-effect waves-light btn"><i class="fas fa-edit left"></i> Edit Profile</a>
+      </div>
+      <div class="col s4">
+        <a href="{% url 'account:logout' %}" class="waves-effect waves-light btn"><i class="fas fa-sign-out-alt left"></i> Logout</a>
+      </div>
+    </div>
+  </fieldset>
+  {% if user.is_superuser or user.is_staff %}
+  <fieldset class="form-group">
+    <legend style='font-weight:bold;font-size:20px;'>For Admin</legend>
+    <div class="row center">
+      <div class="col s12">
+        <a href="{% url 'admin:index' %}" class="waves-effect waves-light btn">Admin Dashboard</a>
+      </div>
+    </div>
+  </fieldset>
+  {% endif %}
+</div>
+{% endblock %}

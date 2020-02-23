@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block center %}
+<div class="card card-cascade wider reverse mt-5 mb-5">
+  <div class="card-body card-body-cascade text-center">
+    <h4 class="card-title"><strong>Fill details</strong></h4>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger">
+      <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form method="post" onsubmit="if(document.getElementById('registration').value.length === 8){return true;}else{alert('Enter Correct Registration Number.');return false;}">
+      {% csrf_token %}
+      <div class="form-group pt-2">
+        <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <input type="number" name="registration" class="form-control" id="registration" placeholder="Registration Number" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required>
+      </div>
+      <div class="form-group">Game:
+        <input type="text" name="game" class="form-control" id="date" value="Snooker" readonly>
+      </div>
+      <div class="form-group">Date:
+        <input type="text" name="date" class="form-control" id="date" value="{{ selected_date }}" readonly>
+      </div>
+      <div class="form-group">Time:
+        <input type="text" name="time" class="form-control" id="date" value="{{ selected_time }}" readonly>
+      </div>
+      <button type="submit" class="btn btn-primary">Book Your Slot</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+{% block center %}
+<div class="card card-cascade wider reverse mt-5 mb-5">
+  <div class="card-body card-body-cascade text-center">
+    <h4 class="card-title"><strong>Tell us When are you free to Play so others can invite you</strong></h4>
+    <form method="post" onsubmit="if(document.getElementById('registration').value.length === 8){return true;}else{alert('Enter Correct Registration Number.');return false;}">
+      {% csrf_token %}
+      <div class="form-check form-check-inline">
+        {% for i in date %}
+        <input class="form-check-input" type="checkbox" name="check-{{ forloop.counter }}" id="{{ i|date:'d-m-Y' }}" value="{{ i|date:'d-m-Y' }}">
+        <label class="form-check-label pr-3" for="{{ i|date:'d-m-Y' }}">{{ i|date:"l" }}</label>
+        {% endfor %}
+      </div>
+      <button style='margin-top:10px;' type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
